@@ -53,8 +53,14 @@ Options:
   --path        Path to the server directory  (default: .)
 ```
 
+### Custom args
+The second argument is the custom arg array if any, if it's not set, we default to `process.argv`.
 
-#### ES6 import
+```js
+require('basic-args')(options, process.argv)
+```
+
+### ES6 import
 ```js
 import basicArg from 'basic-args'
 const args = basicArg({
