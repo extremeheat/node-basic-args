@@ -1,3 +1,5 @@
+const yargs = require('yargs-parser')
+
 const boolMap = {
   true: true,
   false: false,
@@ -12,7 +14,7 @@ const boolMap = {
 }
 
 function parse (options, args) {
-  const argv = require('yargs-parser')(args || process.argv.slice(2))
+  const argv = yargs(args || process.argv.slice(2))
 
   const allOptions = new Map()
   const missing = new Set()
@@ -38,10 +40,12 @@ function parse (options, args) {
       if (Array.isArray(value)) {
         console.log('\t', key)
         for (const [k, v] of value.entries()) {
-          error += `  --${k}\t${v.description}` + (v.default ? `  (default: ${v.default})` : '  ') + '\n'
+          const n = k + (v.alias ? `, -${v.alias}` : '')
+          error += `  --${n}\t${v.description}` + (v.default ? `  (default: ${v.default})` : '  ') + '\n'
         }
       } else {
-        error += `  --${key}\t${value.description}` + (value.default ? `  (default: ${value.default})` : '  ') + '\n'
+        const n = key + (value.alias ? `, -${value.alias}` : '')
+        error += `  --${n}\t${value.description}` + (value.default ? `  (default: ${value.default})` : '  ') + '\n'
       }
     }
 
@@ -58,13 +62,13 @@ function parse (options, args) {
         throw new Error(`Duplicate option: ${key}`)
       }
       allOptions.set(key, value)
-      const V = argv[key]
+      const V = argv[key] || argv[value.alias]
 
       if (value.type === Boolean) {
         if (value.default !== undefined) throw Error(`Boolean options cannot have default values (${key})`)
 
         if (V && boolMap[V] === undefined) {
-          return raise(`Invalid value for ${key}, expected boolean (true/false/yes/no/0/1)`, options)
+          return raise(`Invalid value for ${key}, expected boolean. You don't need to put any arguments to use this flag.`, options)
         }
         haves.set(key, boolMap[V] || V || false)
       } else {

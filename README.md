@@ -32,11 +32,14 @@ const args = require('basic-args')({
 console.log(args)
 ```
 
-After being ran with `node index.js --version 1.16` we would get:
+After being ran with `node index.js --version 1.16` (or using `-v 1.16` alias) we would get:
 
 ```js
 { version: '1.16.1', port: 25565, online: false, path: '.' }
 ```
+
+Please note Boolean options do not need arguments, simply passing them as an argument will resolve
+them to be true. If you want to force an argumnent, set type to a String to handle yourself.
 
 ### Help screen
 If we run with --help or get a argument error, we see the help screen:

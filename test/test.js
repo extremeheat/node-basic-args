@@ -30,7 +30,7 @@ it('works', function () {
       online: { type: Boolean, description: 'Whether to run in online mode' },
       path: { type: String, description: 'Path to the server directory', default: '.' }
     }
-  }, ['--version', '1.0.0', '--port', '25565', '--online'])
+  }, ['-v', '1.0.0', '--port', '25565', '--online'])
 
   console.log(args)
   assert.strictEqual(args.version, '1.0.0')
