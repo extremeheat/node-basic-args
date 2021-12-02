@@ -1,6 +1,6 @@
 {
   "name": "basic-args",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "basic argument parser with built in help screen",
   "main": "index.js",
   "directories": {
