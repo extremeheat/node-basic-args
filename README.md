@@ -1,5 +1,5 @@
 # basic-args
-[![NPM version](https://img.shields.io/npm/v/bedrock-protocol.svg)](http://npmjs.com/package/node-basic-args)
+[![NPM version](https://img.shields.io/npm/v/basic-args.svg)](http://npmjs.com/package/basic-args)
 [![Build Status](https://github.com/extremeheat/node-basic-args/workflows/CI/badge.svg)](https://github.com/extremeheat/node-basic-args/actions?query=workflow%3A%22CI%22)
 [![Discord](https://img.shields.io/badge/chat-on%20discord-brightgreen.svg)](https://discord.gg/GsEFRM8)
 [![Try it on gitpod](https://img.shields.io/badge/try-on%20gitpod-brightgreen.svg)](https://gitpod.io/#https://github.com/extremeheat/node-basic-args)
@@ -29,13 +29,13 @@ const args = require('basic-args')({
   }
 })
 
-console.log('OK, your args were', args)
+console.log(args)
 ```
 
 After being ran with `node index.js --version 1.16` we would get:
 
 ```js
-OK, your args were { version: '1.16.1', port: 25565, online: false, path: '.' }
+{ version: '1.16.1', port: 25565, online: false, path: '.' }
 ```
 
 #### ES6 import
