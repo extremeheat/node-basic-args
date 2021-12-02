@@ -38,6 +38,22 @@ After being ran with `node index.js --version 1.16` we would get:
 { version: '1.16.1', port: 25565, online: false, path: '.' }
 ```
 
+### Help screen
+If we run with --help or get a argument error, we see the help screen:
+
+```
+> node example.js --help   
+basic-args-example - v1.0.0
+A basic example of basic-args
+
+Options:
+  --version     Version to connect as
+  --port        Port to listen on  (default: 25565)
+  --online      Whether to run in online mode
+  --path        Path to the server directory  (default: .)
+```
+
+
 #### ES6 import
 ```js
 import basicArg from 'basic-args'
