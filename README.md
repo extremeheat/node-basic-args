@@ -13,6 +13,8 @@ Basic argument parsing library using yargs-parser with built-in help screen
 
 ## Usage
 
+See index.d.ts for API
+
 #### CommonJS import
 
 ```js
@@ -39,7 +41,9 @@ After being ran with `node index.js --version 1.16` (or using `-v 1.16` alias) w
 ```
 
 Please note Boolean options do not need arguments, simply passing them as an argument will resolve
-them to be true. If you want to force an argumnent, set type to a String to handle yourself.
+them to be true. If you want to force an argument, set type to a String to handle yourself.
+
+Extraneous arguments (when not using errorOnExtra) are stored in the `_` index of the output. The nested `_` contains positionals.
 
 ### Help screen
 If we run with --help or get a argument error, we see the help screen:

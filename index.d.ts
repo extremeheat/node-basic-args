@@ -12,6 +12,7 @@ declare module "basic-cli" {
     version: string,
     description: string,
     throwOnError?: boolean, // Throw an error instead of calling process.exit() with help screen (default: false)
+    errorOnExtra?: boolean, // Throw an error if there are extra arguments (default: false)
     helpCommand?: string, // The -- command for opening the built-in help screen (default: help)
     options: Option[]
   }, arguments?: string[])

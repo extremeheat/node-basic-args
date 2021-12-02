@@ -99,6 +99,13 @@ function parse (options, args) {
     return raise(`** Missing required options: ${missingList}`, options)
   }
 
+  const extra = Object.entries(argv).filter((key) => !allOptions.has(key))
+  haves.set('_', Object.fromEntries(extra))
+
+  if (options.errorOnExtra && extra.length) {
+    return raise(`** Extraneous options: ${extra.join(', ')}`, options)
+  }
+
   return Object.fromEntries(haves)
 }
 
