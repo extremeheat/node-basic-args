@@ -1,0 +1,38 @@
+{
+  "name": "basic-args",
+  "version": "1.0.0",
+  "description": "basic argument parser with built in help screen",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "mocha",
+    "lint": "standard",
+    "fix": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/extremeheat/node-basic-args.git"
+  },
+  "keywords": [
+    "cli",
+    "argument",
+    "parser",
+    "argparser"
+  ],
+  "author": "extremeheat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/extremeheat/node-basic-args/issues"
+  },
+  "homepage": "https://github.com/extremeheat/node-basic-args#readme",
+  "dependencies": {
+    "yargs-parser": "^21.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.3",
+    "standard": "^16.0.4",
+    "basic-args": "file:."
+  }
+}
