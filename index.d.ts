@@ -1,4 +1,5 @@
 declare module "basic-cli" {
+  // The second argument is the custom arg array if any, otherwise default to `process.argv`  
   export default function(options: {
     name: string,
     version: string,
@@ -6,5 +7,5 @@ declare module "basic-cli" {
     throwOnError?: boolean, // Throw an error instead of calling process.exit() with help screen (default: false)
     helpCommand?: string, // The -- command for opening the built-in help screen (default: help)
     options: Object
-  })
+  }, arguments?: string[])
 }
