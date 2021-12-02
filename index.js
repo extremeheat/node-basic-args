@@ -13,7 +13,6 @@ const boolMap = {
 
 function parse (options, args) {
   const argv = require('yargs-parser')(args || process.argv.slice(2))
-  // console.log(argv)
 
   const allOptions = new Map()
   const missing = new Set()
@@ -90,8 +89,6 @@ function parse (options, args) {
       }
     }
   }
-
-  // console.log(haves, missing, allOptions)
 
   if (missing.size) {
     const missingList = Array.from(missing).join(', ')
