@@ -106,7 +106,14 @@ function parse (options, args) {
     return raise(`** Extraneous options: ${extra.join(', ')}`, options)
   }
 
-  return Object.fromEntries(haves)
+  const result = Object.fromEntries(haves)
+
+  if (options.validate) {
+    const ret = options.validate(result)
+    if (ret !== true) raise(ret)
+  }
+
+  return result
 }
 
 module.exports = parse
