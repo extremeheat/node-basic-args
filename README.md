@@ -81,7 +81,8 @@ const args = basicArg({
     port: { type: Number, description: 'Port to listen on', default: 25565 },
     online: { type: Boolean, description: 'Whether to run in online mode' },
     path: { type: String, description: 'Path to the server directory', default: '.' }
-  }
+  },
+  // validate (args) { return true } /* optional fn to verify the args before returning them; non-true return value will print help screen */
 })
 // ...
 ```
