@@ -15,6 +15,9 @@ const boolMap = {
 
 function parse (options, args) {
   const argv = yargs(args || process.argv.slice(2))
+  if (options.preprocess) {
+    options.preprocess(argv)
+  }
   const ranHelpCommand = argv[options.helpCommand || 'help']
 
   const allOptions = new Map()
