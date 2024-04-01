@@ -15,6 +15,7 @@ const boolMap = {
 
 function parse (options, args) {
   const argv = yargs(args || process.argv.slice(2))
+  const ranHelpCommand = argv[options.helpCommand || 'help']
 
   const allOptions = new Map()
   const missing = new Set()
@@ -50,11 +51,15 @@ function parse (options, args) {
     }
 
     if (message) console.warn(message, '\n')
+    if (ranHelpCommand) {
+      console.log(error)
+      process.exit(0)
+    }
     console.error(error)
     process.exit(1)
   }
 
-  if (argv[options.helpCommand || 'help']) return raise()
+  if (ranHelpCommand) return raise()
 
   for (const [k, v] of Object.entries(options.options)) {
     for (const [key, value] of Array.isArray(v) ? v : [[k, v]]) {
