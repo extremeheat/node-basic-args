@@ -1,3 +1,6 @@
+## 1.4.1
+* [Fix string/number parsing (#6)](https://github.com/extremeheat/node-basic-args/commit/18a3aa49efab910ed38d7f5dea22b6d4bf15fc5d) (thanks @extremeheat)
+
 ## 1.4.0
 * [Add a preprocess() hook before any parsing is done by basic-args](https://github.com/extremeheat/node-basic-args/commit/c7a9af15aa0412957a6d5d9291a9c0f889604b2a) (thanks @extremeheat)
 * [Exit normally when using --help argument](https://github.com/extremeheat/node-basic-args/commit/fc39c812f0331261557aec5b9821119fedd1e444) (thanks @extremeheat)
