@@ -14,7 +14,11 @@ const boolMap = {
 }
 
 function parse (options, args) {
-  const argv = yargs(args || process.argv.slice(2))
+  const argv = yargs(args || process.argv.slice(2), {
+    configuration: {
+      'parse-numbers': false,
+    }
+  })
   if (options.preprocess) {
     options.preprocess(argv)
   }
@@ -64,39 +68,37 @@ function parse (options, args) {
 
   if (ranHelpCommand) return raise()
 
-  for (const [k, v] of Object.entries(options.options)) {
-    for (const [key, value] of Array.isArray(v) ? v : [[k, v]]) {
-      if (allOptions.has(key)) {
-        throw new Error(`Duplicate option: ${key}`)
+  for (const [key, value] of Object.entries(options.options)) {
+    if (allOptions.has(key)) {
+      throw new Error(`Duplicate option: ${key}`)
+    }
+    allOptions.set(key, value)
+    const V = argv[key] || argv[value.alias]
+
+    if (value.type === Boolean) {
+      if (value.default !== undefined) throw Error(`Boolean options cannot have default values (${key})`)
+
+      if (V && boolMap[V] === undefined) {
+        return raise(`Invalid value for ${key}, expected boolean. You don't need to put any arguments to use this flag.`, options)
       }
-      allOptions.set(key, value)
-      const V = argv[key] || argv[value.alias]
-
-      if (value.type === Boolean) {
-        if (value.default !== undefined) throw Error(`Boolean options cannot have default values (${key})`)
-
-        if (V && boolMap[V] === undefined) {
-          return raise(`Invalid value for ${key}, expected boolean. You don't need to put any arguments to use this flag.`, options)
-        }
-        haves.set(key, boolMap[V] || V || false)
-      } else {
-        if (V === undefined) {
-          if (value.default === undefined) {
-            missing.add(key)
-          } else {
-            haves.set(key, value.default)
-          }
+      haves.set(key, boolMap[V] || V || false)
+    } else {
+      if (V === undefined) {
+        if (value.default === undefined) {
+          missing.add(key)
         } else {
-          if (value.type === Number) {
-            if (isNaN(V)) return raise(`Invalid value for ${key}, expected number`, options)
-            haves.set(key, Number(V))
-          } else if (value.type === String) {
-            if (typeof V === 'number') haves.set(key, String(V))
-            else if (typeof V !== 'string') return raise(`Invalid value for ${key}, expected a string but got ${typeof V}`, options)
-            else haves.set(key, V)
-          } else {
-            throw Error(`Unknown type: ${value.type}, in ${key} - must be Boolean, Number, or String`)
-          }
+          haves.set(key, value.default)
+        }
+      } else {
+        if (value.type === Number) {
+          if (isNaN(V)) return raise(`Invalid value for ${key}, expected number`, options)
+          haves.set(key, Number(V))
+        } else if (value.type === String) {
+          if (typeof V === 'number') haves.set(key, String(V))
+          else if (typeof V !== 'string') return raise(`Invalid value for ${key}, expected a string but got ${typeof V}`, options)
+          else haves.set(key, V)
+        } else {
+          throw Error(`Unknown type: ${value.type}, in ${key} - must be Boolean, Number, or String`)
         }
       }
     }
