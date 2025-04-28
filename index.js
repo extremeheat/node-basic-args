@@ -133,7 +133,7 @@ function parse (options, args) {
           if (boolMap[value] === undefined) return raise(`Invalid value for positional argument ${posDef.name}, expected boolean`)
           haves.set(posDef.name, boolMap[value])
         } else {
-          throw Error(`Unknown type for positional argument: ${posDef.type}`)
+          throw Error(`Unknown type for positional argument '${posDef.name}': ${posDef.type}`)
         }
       }
     }
