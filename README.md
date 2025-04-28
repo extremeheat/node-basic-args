@@ -7,13 +7,12 @@
 Basic argument parsing library using yargs-parser with built-in help screen
 
 ## Features
-- **Options**: Define flagged arguments (e.g., `--version`) with types (`String`, `Number`, `Boolean`), descriptions, aliases, and defaults.
-- **Positionals**: Define required positional arguments (e.g., `input.txt output.txt`) with names, types, and descriptions using the `positionals` array.
-- **Help Screen**: Automatically generated with positionals, options, and user-defined usage examples.
-- **Boolean Options**: Simply passing a boolean flag (e.g., `--online`) sets it to `true`. No arguments are needed.
-- **Extras**: Extraneous arguments are stored in the `_` property unless `errorOnExtra` is `true`.
-- **Validation**: Optional `validate` function to check parsed arguments before returning.
-- **Preprocessing**: Optional `preprocess` function to modify raw arguments before parsing.
+- Flagged arguments (e.g., `--version`) with types, descriptions, aliases, and defaults.
+- Positional arguments
+- Help screen: Automatically generated with positionals, options, and user-defined usage examples.
+- Extraneous arguments are stored in the `_` property unless `errorOnExtra` is `true`.
+- Validation: Optional `validate` hook to check yargs parsed arguments before returning.
+- Preprocessing: Optional `preprocess` hook to modify raw arguments before parsing.
 
 ## Installation
 
