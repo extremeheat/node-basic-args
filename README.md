@@ -38,6 +38,10 @@ const args = require('basic-args')({
   positionals: [
     { name: 'input', type: String, description: 'Input file path' },
     { name: 'output', type: String, description: 'Output file path' }
+  ],
+  examples: [
+    'basic-args-example <inputFile> <outputFile> [--version str]',
+    'basic-args-example input.txt output.txt --version 1.16         Start server with version 1.16'
   ]
 })
 
@@ -69,8 +73,7 @@ Options:
 
 Usage:
   basic-args-example input.txt output.txt --version 1.16  Start server with version 1.16
-  basic-args-example input.txt output.txt --port 8080      Start server on port 8080
-  basic-args-example input.txt output.txt --online        Start server in online mode
+  basic-args-example input.txt output.txt --version 1.16         Start server with version 1.16
 ```
 
 ### Configuration
