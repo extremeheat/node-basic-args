@@ -1,3 +1,6 @@
+## 1.5.0
+* [Add positional arguments support (#8)](https://github.com/extremeheat/node-basic-args/commit/b1c7c202d68d0a62f194bf3315340c201a546b20) (thanks @extremeheat)
+
 ## 1.4.1
 * [Fix string/number parsing (#6)](https://github.com/extremeheat/node-basic-args/commit/18a3aa49efab910ed38d7f5dea22b6d4bf15fc5d) (thanks @extremeheat)
 
