@@ -11,7 +11,7 @@ Basic argument parsing library using yargs-parser with built-in help screen
 - Positional arguments
 - Help screen: Automatically generated with positionals, options, and user-defined usage examples.
 - Extraneous arguments are stored in the `_` property unless `errorOnExtra` is `true`.
-- Validation: Optional `validate` hook to check yargs parsed arguments before returning.
+- Validation: Optional `validate` hook to check yargs parsed arguments right before returning the final object.
 - Preprocessing: Optional `preprocess` hook to modify raw arguments before parsing.
 
 ## Installation
@@ -48,10 +48,10 @@ const args = require('basic-args')({
 console.log(args)
 ```
 
-Running the above with `basic-args-example input.txt output.txt --version 1.16` (or using `-v 1.16`) yields:
+Running the above with `basic-args-example input.txt output.txt --version 1.16 --a --b 12` (or using `-v 1.16`) yields:
 
 ```js
-{ input: 'input.txt', output: 'output.txt', version: '1.16', port: 25565, online: false, path: '.' }
+{ input: 'input.txt', output: 'output.txt', version: '1.16', port: 25565, online: false, path: '.', _: { a: true, b: 12 } }
 ```
 
 #### Help Screen
@@ -80,18 +80,18 @@ Usage:
 - `name`: Program name (shown in help).
 - `version`: Program version (shown in help).
 - `description`: Program description (shown in help).
-- `options`: Object mapping option names to `{ type, description, alias?, default? }`.
+- `options`: Object mapping option names to `{ type, description, alias?, default? }`. For `type: Boolean`, these are always treated as optional. For all other types, they are treated as required and optional otherwise if `default` is specified.
 - `positionals`: Array of `{ name, type, description? }` for required positional arguments.
 - `examples`: Array of strings for usage examples in the help screen.
 - `errorOnExtra`: If `true`, errors on unrecognized options (default: `false`).
 - `throwOnError`: If `true`, throws errors instead of exiting (default: `false`).
 - `helpCommand`: Command to trigger help screen (default: `help`).
 - `preprocess`: Function to preprocess raw arguments.
-- `validate`: Function to validate parsed arguments.
+- `validate`: Function to validate parsed arguments. You can use this to inject or modify values. Return `false` here to show the error screen, otherwise `true` or undefined for success.
 
 ### Notes
 - Positional arguments are required and must match the order and number defined in `positionals`.
-- Extra positional arguments are stored in `_` unless `errorOnExtra` is `true`.
+- Extra positional arguments are stored in an object named `_` unless `errorOnExtra` is `true`.
 - Boolean options don’t accept values (e.g., `--online` is `true`, not `--online true`). Use `String` type for custom handling.
 - Use the second argument to pass custom args instead of `process.argv`:
 
